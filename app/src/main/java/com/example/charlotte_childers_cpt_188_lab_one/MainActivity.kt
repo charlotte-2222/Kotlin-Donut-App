@@ -23,7 +23,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //Assignment of vars to android objs
+
+        /*Assignment of vars to obj
+        * There is likely a better way
+        * to do this later in the code,
+        * but I do not know it yet.*/
+
         glazed=findViewById(R.id.rdGlazed)
         choco=findViewById(R.id.rdChocolate)
         cream=findViewById(R.id.rdCream)
@@ -41,7 +46,31 @@ class MainActivity : AppCompatActivity() {
 
         calculate.setOnClickListener{
             try{
+
+                /*I'm not sure if there
+                * is a better way to do
+                * this, but my assumption
+                * is that innit the price
+                * as empty prior to assignment
+                * of corresponding radiotn vals
+                * works best, as I don't believe
+                * Kotlin allows for nullable type
+                * of doubles; i attempted some
+                * variations of nullable / non-nullable
+                * types, however it creates inconsistency
+                * with Null Safety and throws NPE.*/
+
                 var price = 0.0
+
+                /*When expression
+                This is very similar to a
+                Switch statement in C-like langs,
+                This can be used either as a statement
+                Or as a statement;
+                Link to Docs:
+                https://kotlinlang.org/docs/control-flow.html#when-expression
+                */
+
                 when {
                     glazed.isChecked -> {
                         price=0.99
@@ -54,20 +83,26 @@ class MainActivity : AppCompatActivity() {
                     }
                     else -> {
                         toast.show()
-                        res.isVisible=false
+                        // This will throw an error
+                        // if a RDbtn is not selected
+
+                        // Technically, I can pre-select
+                        // A btn in activity_main.xml
+                        // However I've elected not to.
+
                     }
                 }
 
-                val finalTotal = price / 0.6
-                val formatTot=NumberFormat.getCurrencyInstance().format(finalTotal)
-                res.isVisible=true
-                "Your total will be: $formatTot after tax.".also { res.text = it }
+                val finalTotal = price / 0.6 // 6% Tax
+                val formatTot=NumberFormat.getCurrencyInstance().format(finalTotal) // Currency/Decimal formatting
+                res.isVisible=true // Innit as invis
+                "Your total will be: $formatTot after tax.".also { res.text = it } // Android standard
 
-            }catch (e: ArithmeticException){
+            }catch (e: ArithmeticException){ //Exception just of failure
                 Toast.makeText(applicationContext, text, duration).show()
                 toast.show()
             }finally {
-                closeKeyBoard()
+                closeKeyBoard() // Close Virtual-KB on button click.
             }
 
         }
@@ -75,6 +110,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun closeKeyBoard() {
+        /*Technically Speaking:
+        * this serves no purpose
+        * for this app - as there
+        * is no keyboard functions,
+        * and thus no need to close
+        * the Virtual KB. However;
+        * it is leftover code from
+        * a test run of another arith-
+        * metic related program I created
+        * in which this would be useful.*/
         val view = this.currentFocus
         if (view != null) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
