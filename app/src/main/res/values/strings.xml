@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Charlotte-Childers-CPT-188-Lab-One</string>
+    <string name="calculate">Calculate</string>
+    <string name="result">result</string>
+    <string name="chocolate_1_20">Chocolate $1.20</string>
+    <string name="cream_filled_1_90">Cream Filled $1.90</string>
+    <string name="glazed_0_99">Glazed $0.99</string>
+    <string name="donut_shop">Donut Shop</string>
+    <string name="choose_your_favorite">Choose your Favorite!</string>
 </resources>

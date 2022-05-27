@@ -12,6 +12,7 @@ import java.text.NumberFormat
 
 
 class MainActivity : AppCompatActivity() {
+
     //Declared vars
     lateinit var glazed: RadioButton
     lateinit var choco: RadioButton
